@@ -9,5 +9,6 @@ const movieSchema = new Schema({
     }
 })
 //creating model
+//const variablename=model("TableName",schemaName)
 const movieModel = model("Movie", movieSchema)
 export default movieModel
