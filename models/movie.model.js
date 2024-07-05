@@ -1,6 +1,6 @@
 import { model, Schema } from "mongoose";
 //creating schema
-const schema = new Schema({
+const movieSchema = new Schema({
     id: Number,
     name: {
         type:String,
@@ -9,5 +9,5 @@ const schema = new Schema({
     }
 })
 //creating model
-const movie = model("Movie", schema)
-export default movie
+const movieModel = model("Movie", movieSchema)
+export default movieModel
