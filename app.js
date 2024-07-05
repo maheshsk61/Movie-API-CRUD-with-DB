@@ -3,7 +3,7 @@ import movieRoutes from './routes/movies.route.js'
 import express from 'express'
 const app = express()
 const port = 2000
-//calling the db
+//calling the db connection
 connectDB()
 //middlewares
 app.use(express.json())

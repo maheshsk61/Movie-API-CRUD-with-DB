@@ -1,6 +1,7 @@
 import express from 'express'
 import { movieCreate, movieRead, movieUpdate, movieDelete } from "../controllers/movies.controller.js"
 const router = express.Router()
+//routes
 //create
 router.post("/", movieCreate)
 //read
