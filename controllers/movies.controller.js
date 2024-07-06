@@ -24,18 +24,17 @@ export const movieRead = async (req, res) => {
 }
 export const movieUpdate = async (req, res) => {
     try {
-        // Find the movie by ID
-        const foundMovie = await movieModel.findById(req.params.id)
+        const movieId = req.params.id;//Assuming as a string
+        // Find the movie by ID 
+        const foundMovie = await movieModel.findOne({ id: movieId });
         if (!foundMovie) {
-            res.status(404).json({ message: "Movie not found" })
+            return res.status(404).json({ message: 'Movie not found' });
         }
         // Update the movie with new data from req.body
-        // Assuming req.body contains the fields to be updated
-        const updatedMovie = await movieModel.findByIdAndUpdate(req.params.id, req.body, { new: true })
-        // req.params.id,  The ID from the URL
-        // req.body,  The data to update the movie with
-        // { new: true }  Return the updated document
-        // Send back the updated movie data
+        const updatedMovie = await movieModel.findOneAndUpdate({ id: movieId }, req.body, { new: true });
+        //{ id: movieId } -> with the help of movieId
+        //req.body -> updating the req.body
+        //{ new: true } ->Returns the updated req.body
         res.json(updatedMovie);
     }
     catch (e) {
@@ -44,11 +43,12 @@ export const movieUpdate = async (req, res) => {
 }
 export const movieDelete = async (req, res) => {
     try {
-        const foundMovie = await movieModel.findById(req.params.id)
-        if (foundMovie) {
-            const deletedMovie = await movie.findByIdAndDelete(req.params.id)
-            res.json(deletedMovie)
+        const movieId = req.params.id;
+        const deletedMovie = await movieModel.findOneAndDelete({ id: movieId });
+        if (!deletedMovie) {
+            return res.status(404).json({ message: 'Movie not found' });
         }
+        res.json(deletedMovie);
     }
     catch (e) {
         res.status(500).json({ message: e.message })

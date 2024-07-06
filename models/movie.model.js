@@ -1,7 +1,11 @@
 import { model, Schema } from "mongoose";
 //creating schema
 const movieSchema = new Schema({
-    id: Number,
+    id: {
+        type:Number,
+        required:true,
+        unique:true
+    },
     name: {
         type:String,
         required:true,
